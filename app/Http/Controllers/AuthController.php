@@ -9,7 +9,7 @@ use Illuminate\Validation\ValidationException;
 use OpenApi\Annotations as OA;
 
 /**
- * @OA\Info(title="Laravel Sanctum Auth API", version="1.0")
+ * @OA\Info(title="Antech Async Order Service", version="1.0")
  * 
  * @OA\SecurityScheme(
  *     securityScheme="bearerAuth",
