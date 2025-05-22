@@ -63,8 +63,10 @@ class BillController extends Controller
      *             type="object",
      *             @OA\Property(property="bill", type="object",
      *                 @OA\Property(property="id", type="integer"),
+     *                 @OA\Property(property="sub_total", type="number", format="float"),
      *                 @OA\Property(property="discount", type="number", format="float"),
      *                 @OA\Property(property="tax_rate", type="number", format="float"),
+     *                 @OA\Property(property="total", type="number", format="float"),
      *                 @OA\Property(property="paid", type="boolean")
      *             ),
      *             @OA\Property(
@@ -77,10 +79,6 @@ class BillController extends Controller
      *                     @OA\Property(property="total", type="number", format="float")
      *                 )
      *             ),
-     *             @OA\Property(property="subtotal", type="number", format="float"),
-     *             @OA\Property(property="discount", type="number", format="float"),
-     *             @OA\Property(property="tax", type="number", format="float"),
-     *             @OA\Property(property="grand_total", type="number", format="float")
      *         )
      *     ),
      *     @OA\Response(
@@ -127,14 +125,27 @@ class BillController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Bill paid successfully",
+     *         description="Bill details retrieved successfully",
      *         @OA\JsonContent(
      *             type="object",
-     *             @OA\Property(property="message", type="string", example="Bill paid successfully"),
-     *             @OA\Property(property="subtotal", type="number", format="float"),
-     *             @OA\Property(property="discount", type="number", format="float"),
-     *             @OA\Property(property="tax", type="number", format="float"),
-     *             @OA\Property(property="grand_total", type="number", format="float")
+     *             @OA\Property(property="bill", type="object",
+     *                 @OA\Property(property="id", type="integer"),
+     *                 @OA\Property(property="sub_total", type="number", format="float"),
+     *                 @OA\Property(property="discount", type="number", format="float"),
+     *                 @OA\Property(property="tax_rate", type="number", format="float"),
+     *                 @OA\Property(property="total", type="number", format="float"),
+     *                 @OA\Property(property="paid", type="boolean")
+     *             ),
+     *             @OA\Property(
+     *                 property="items",
+     *                 type="array",
+     *                 @OA\Items(
+     *                     @OA\Property(property="id", type="integer"),
+     *                     @OA\Property(property="price", type="number", format="float"),
+     *                     @OA\Property(property="quantity", type="integer"),
+     *                     @OA\Property(property="total", type="number", format="float")
+     *                 )
+     *             ),
      *         )
      *     ),
      *     @OA\Response(

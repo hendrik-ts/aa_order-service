@@ -258,11 +258,19 @@
                                                 "id": {
                                                     "type": "integer"
                                                 },
+                                                "sub_total": {
+                                                    "type": "number",
+                                                    "format": "float"
+                                                },
                                                 "discount": {
                                                     "type": "number",
                                                     "format": "float"
                                                 },
                                                 "tax_rate": {
+                                                    "type": "number",
+                                                    "format": "float"
+                                                },
+                                                "total": {
                                                     "type": "number",
                                                     "format": "float"
                                                 },
@@ -293,22 +301,6 @@
                                                 },
                                                 "type": "object"
                                             }
-                                        },
-                                        "subtotal": {
-                                            "type": "number",
-                                            "format": "float"
-                                        },
-                                        "discount": {
-                                            "type": "number",
-                                            "format": "float"
-                                        },
-                                        "tax": {
-                                            "type": "number",
-                                            "format": "float"
-                                        },
-                                        "grand_total": {
-                                            "type": "number",
-                                            "format": "float"
                                         }
                                     },
                                     "type": "object"
@@ -342,30 +334,59 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Bill paid successfully",
+                        "description": "Bill details retrieved successfully",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Bill paid successfully"
+                                        "bill": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "sub_total": {
+                                                    "type": "number",
+                                                    "format": "float"
+                                                },
+                                                "discount": {
+                                                    "type": "number",
+                                                    "format": "float"
+                                                },
+                                                "tax_rate": {
+                                                    "type": "number",
+                                                    "format": "float"
+                                                },
+                                                "total": {
+                                                    "type": "number",
+                                                    "format": "float"
+                                                },
+                                                "paid": {
+                                                    "type": "boolean"
+                                                }
+                                            },
+                                            "type": "object"
                                         },
-                                        "subtotal": {
-                                            "type": "number",
-                                            "format": "float"
-                                        },
-                                        "discount": {
-                                            "type": "number",
-                                            "format": "float"
-                                        },
-                                        "tax": {
-                                            "type": "number",
-                                            "format": "float"
-                                        },
-                                        "grand_total": {
-                                            "type": "number",
-                                            "format": "float"
+                                        "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "price": {
+                                                        "type": "number",
+                                                        "format": "float"
+                                                    },
+                                                    "quantity": {
+                                                        "type": "integer"
+                                                    },
+                                                    "total": {
+                                                        "type": "number",
+                                                        "format": "float"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
                                         }
                                     },
                                     "type": "object"
