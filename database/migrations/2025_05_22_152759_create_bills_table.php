@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('code')->unique()->index(); // Add order_code column
             $table->string('table_no', 20); // Add order_code column
-            $table->string('outlet_name', 50); // Add order_code column
             $table->decimal('sub_total', 10, 2)->default(0);      // fixed amount discount
             $table->decimal('discount', 10, 2)->default(0);      // fixed amount discount
             $table->decimal('tax', 5, 2)->default(0);       // percent tax rate, e.g. 10.00 for 10%

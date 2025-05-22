@@ -26,4 +26,9 @@ class Bill extends Model
     {
         return $this->hasMany(BillItem::class);
     }
+
+    public function restaurant()
+    {
+        return $this->belongsTo(Restaurant::class);
+    }
 }

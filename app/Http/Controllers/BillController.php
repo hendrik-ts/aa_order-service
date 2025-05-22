@@ -91,7 +91,7 @@ class BillController extends Controller
      */
     public function show($code)
     {
-        $bill = Bill::with('items')->where('code', $code)->first();
+        $bill = Bill::with('restaurant','items')->where('code', $code)->first();
 
         // Calculate subtotal
         $subtotal = $bill->items->sum(fn($item) => $item->price * $item->quantity);
@@ -167,7 +167,7 @@ class BillController extends Controller
      */
     public function pay($code)
     {
-        $bill = Bill::with('items')->where('code', $code)->first();
+        $bill = Bill::with('restaurant','items')->where('code', $code)->first();
 
         if ($bill->paid) {
             return response()->json(['message' => 'Bill already paid'], 400);
