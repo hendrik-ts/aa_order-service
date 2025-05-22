@@ -119,7 +119,7 @@ class BillController extends Controller
      *     tags={"Bills"},
      *     summary="Pay a bill",
      *     @OA\Parameter(
-     *         name="id",
+     *         name="code",
      *         in="path",
      *         description="Bill Code to pay",
      *         required=true,

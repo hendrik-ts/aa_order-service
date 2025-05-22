@@ -329,7 +329,7 @@
                 "operationId": "a04d1e9c9eb39c7c5f16aede8062b1c1",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "code",
                         "in": "path",
                         "description": "Bill Code to pay",
                         "required": true,
