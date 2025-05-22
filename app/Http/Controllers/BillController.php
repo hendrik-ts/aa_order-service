@@ -63,6 +63,7 @@ class BillController extends Controller
      *             type="object",
      *             @OA\Property(property="bill", type="object",
      *                 @OA\Property(property="id", type="integer"),
+     *                 @OA\Property(property="code", type="string"),
      *                 @OA\Property(property="sub_total", type="number", format="float"),
      *                 @OA\Property(property="discount", type="number", format="float"),
      *                 @OA\Property(property="tax_rate", type="number", format="float"),
@@ -74,6 +75,7 @@ class BillController extends Controller
      *                 type="array",
      *                 @OA\Items(
      *                     @OA\Property(property="id", type="integer"),
+     *                     @OA\Property(property="description", type="string"),
      *                     @OA\Property(property="price", type="number", format="float"),
      *                     @OA\Property(property="quantity", type="integer"),
      *                     @OA\Property(property="amount", type="number", format="float")
@@ -130,6 +132,7 @@ class BillController extends Controller
      *             type="object",
      *             @OA\Property(property="bill", type="object",
      *                 @OA\Property(property="id", type="integer"),
+     *                 @OA\Property(property="code", type="string"),
      *                 @OA\Property(property="sub_total", type="number", format="float"),
      *                 @OA\Property(property="discount", type="number", format="float"),
      *                 @OA\Property(property="tax_rate", type="number", format="float"),
@@ -141,6 +144,7 @@ class BillController extends Controller
      *                 type="array",
      *                 @OA\Items(
      *                     @OA\Property(property="id", type="integer"),
+     *                     @OA\Property(property="description", type="string"),
      *                     @OA\Property(property="price", type="number", format="float"),
      *                     @OA\Property(property="quantity", type="integer"),
      *                     @OA\Property(property="amount", type="number", format="float")

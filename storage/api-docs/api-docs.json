@@ -258,6 +258,9 @@
                                                 "id": {
                                                     "type": "integer"
                                                 },
+                                                "code": {
+                                                    "type": "string"
+                                                },
                                                 "sub_total": {
                                                     "type": "number",
                                                     "format": "float"
@@ -286,6 +289,9 @@
                                                 "properties": {
                                                     "id": {
                                                         "type": "integer"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
                                                     },
                                                     "price": {
                                                         "type": "number",
@@ -344,6 +350,9 @@
                                                 "id": {
                                                     "type": "integer"
                                                 },
+                                                "code": {
+                                                    "type": "string"
+                                                },
                                                 "sub_total": {
                                                     "type": "number",
                                                     "format": "float"
@@ -372,6 +381,9 @@
                                                 "properties": {
                                                     "id": {
                                                         "type": "integer"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
                                                     },
                                                     "price": {
                                                         "type": "number",
