@@ -294,7 +294,7 @@
                                                     "quantity": {
                                                         "type": "integer"
                                                     },
-                                                    "total": {
+                                                    "amount": {
                                                         "type": "number",
                                                         "format": "float"
                                                     }
@@ -380,7 +380,7 @@
                                                     "quantity": {
                                                         "type": "integer"
                                                     },
-                                                    "total": {
+                                                    "amount": {
                                                         "type": "number",
                                                         "format": "float"
                                                     }
