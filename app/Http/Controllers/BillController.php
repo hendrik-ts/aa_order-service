@@ -76,7 +76,7 @@ class BillController extends Controller
      *                     @OA\Property(property="id", type="integer"),
      *                     @OA\Property(property="price", type="number", format="float"),
      *                     @OA\Property(property="quantity", type="integer"),
-     *                     @OA\Property(property="total", type="number", format="float")
+     *                     @OA\Property(property="amount", type="number", format="float")
      *                 )
      *             ),
      *         )
@@ -143,7 +143,7 @@ class BillController extends Controller
      *                     @OA\Property(property="id", type="integer"),
      *                     @OA\Property(property="price", type="number", format="float"),
      *                     @OA\Property(property="quantity", type="integer"),
-     *                     @OA\Property(property="total", type="number", format="float")
+     *                     @OA\Property(property="amount", type="number", format="float")
      *                 )
      *             ),
      *         )
