@@ -13,6 +13,12 @@ class BillItem extends Model
         'quantity',
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'bill_id'
+    ];
+
     protected $appends = ['amount']; 
 
     public function bill()
