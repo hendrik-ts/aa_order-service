@@ -41,7 +41,7 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        return Review::paginate(5);
+        return Review::orderBy('rating', 'desc')->paginate(5);
     }
 
     /**
