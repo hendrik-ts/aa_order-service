@@ -108,12 +108,6 @@ class BillController extends Controller
 
         return response()->json([
             'bill' => $bill,
-            'items' => $bill->items->map(fn($item) => [
-                'id' => $item->id,
-                'price' => $item->price,
-                'quantity' => $item->quantity,
-                'total' => $item->price * $item->quantity,
-            ]),
             'subtotal' => $subtotal,
             'discount' => $discount,
             'tax' => $tax,
