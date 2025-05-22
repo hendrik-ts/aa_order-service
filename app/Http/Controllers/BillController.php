@@ -107,11 +107,8 @@ class BillController extends Controller
         $grandTotal = $subtotal - $discount + $tax;
 
         return response()->json([
-            'bill' => $bill,
-            'subtotal' => $subtotal,
-            'discount' => $discount,
-            'tax' => $tax,
-            'grand_total' => $grandTotal,
+            'message' => 'Bill viewed successfully',
+            'bill' => $bill
         ]);
     }
 
@@ -174,10 +171,7 @@ class BillController extends Controller
 
         return response()->json([
             'message' => 'Bill paid successfully',
-            'subtotal' => $subtotal,
-            'discount' => $discount,
-            'tax' => $tax,
-            'grand_total' => $grandTotal,
+            'bill' => $bill
         ]);
     }
 }
