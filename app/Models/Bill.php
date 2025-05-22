@@ -8,6 +8,7 @@ class Bill extends Model
 {
     protected $fillable = [
         'code',
+        'table_no',
         'sub_total',
         'total',
         'discount',
