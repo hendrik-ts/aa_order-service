@@ -14,11 +14,25 @@ class ReviewController extends Controller
      *     description="API Endpoints for managing reviews"
      * )
      */
-   /**
+    /**
      * @OA\Get(
      *     path="/api/reviews",
      *     tags={"Reviews"},
      *     summary="List reviews with pagination",
+     *    @OA\Parameter(
+     *         name="page",
+     *         in="query",
+     *         required=false,
+     *         description="Page number",
+     *         @OA\Schema(type="integer", example=1)
+     *     ),
+     *     @OA\Parameter(
+     *         name="per_page",
+     *         in="query",
+     *         required=false,
+     *         description="Number of items per page",
+     *         @OA\Schema(type="integer", example=10)
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="List of reviews"
@@ -54,14 +68,14 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'email'=> 'required|string|email',
-            'name'=> 'required|string',
+            'email' => 'required|string|email',
+            'name' => 'required|string',
             'comment' => 'nullable|string',
             'rating' => 'required|integer|min:1|max:5',
         ]);
 
         $review = Review::create([
-            'email' => $validated['email'],            
+            'email' => $validated['email'],
             'name' => $validated['name'],
             'comment' => $validated['comment'],
             'rating' => $validated['rating'],
