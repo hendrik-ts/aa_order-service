@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Laravel Sanctum Auth API",
+        "title": "Antech Async Order Service",
         "version": "1.0"
     },
     "paths": {
