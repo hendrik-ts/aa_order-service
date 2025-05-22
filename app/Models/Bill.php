@@ -17,6 +17,10 @@ class Bill extends Model
         'paid_at',
     ];
 
+    protected $hidden = [
+        'outlet_name'
+    ];
+
     protected $casts = [
         'paid' => 'boolean',
         'paid_at' => 'datetime',
