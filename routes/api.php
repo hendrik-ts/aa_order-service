@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\GoogleAuthController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,3 +33,8 @@ Route::post('/reviews', [ReviewController::class, 'store']);
 Route::get('/reviews/{id}', [ReviewController::class, 'show']);
 Route::put('/reviews/{id}', [ReviewController::class, 'update']);
 Route::delete('/reviews/{id}', [ReviewController::class, 'destroy']);
+
+
+Route::get('/bills', [BillController::class, 'index']);
+Route::get('/bills/{code}', [BillController::class, 'show']);
+Route::post('/bills/{code}/pay', [BillController::class, 'pay']);

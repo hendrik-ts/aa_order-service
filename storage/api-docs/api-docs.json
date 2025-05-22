@@ -192,6 +192,209 @@
                 ]
             }
         },
+        "/api/bills": {
+            "get": {
+                "tags": [
+                    "Bills"
+                ],
+                "summary": "List bills with pagination",
+                "operationId": "bfae5a6fb426bdeb1e1daf8417ca0c59",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Number of items per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of bills"
+                    }
+                }
+            }
+        },
+        "/api/bills/{code}": {
+            "get": {
+                "tags": [
+                    "Bills"
+                ],
+                "summary": "View a bill with details, subtotal, discount, tax, and grand total",
+                "operationId": "14498e88b6b9764994deb53bf6d39b42",
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "description": "Bill Code",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Bill details retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "bill": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "discount": {
+                                                    "type": "number",
+                                                    "format": "float"
+                                                },
+                                                "tax_rate": {
+                                                    "type": "number",
+                                                    "format": "float"
+                                                },
+                                                "paid": {
+                                                    "type": "boolean"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "price": {
+                                                        "type": "number",
+                                                        "format": "float"
+                                                    },
+                                                    "quantity": {
+                                                        "type": "integer"
+                                                    },
+                                                    "total": {
+                                                        "type": "number",
+                                                        "format": "float"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "subtotal": {
+                                            "type": "number",
+                                            "format": "float"
+                                        },
+                                        "discount": {
+                                            "type": "number",
+                                            "format": "float"
+                                        },
+                                        "tax": {
+                                            "type": "number",
+                                            "format": "float"
+                                        },
+                                        "grand_total": {
+                                            "type": "number",
+                                            "format": "float"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Bill not found"
+                    }
+                }
+            }
+        },
+        "/api/bills/{code}/pay": {
+            "post": {
+                "tags": [
+                    "Bills"
+                ],
+                "summary": "Pay a bill",
+                "operationId": "a04d1e9c9eb39c7c5f16aede8062b1c1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Bill Code to pay",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Bill paid successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bill paid successfully"
+                                        },
+                                        "subtotal": {
+                                            "type": "number",
+                                            "format": "float"
+                                        },
+                                        "discount": {
+                                            "type": "number",
+                                            "format": "float"
+                                        },
+                                        "tax": {
+                                            "type": "number",
+                                            "format": "float"
+                                        },
+                                        "grand_total": {
+                                            "type": "number",
+                                            "format": "float"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bill already paid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bill already paid"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Bill not found"
+                    }
+                }
+            }
+        },
         "/api/reviews": {
             "get": {
                 "tags": [
@@ -430,6 +633,10 @@
         {
             "name": "Auth",
             "description": "Auth"
+        },
+        {
+            "name": "Bills",
+            "description": "Bills"
         },
         {
             "name": "Reviews",
