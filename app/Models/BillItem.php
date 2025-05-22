@@ -13,8 +13,15 @@ class BillItem extends Model
         'quantity',
     ];
 
+    protected $appends = ['amount']; 
+
     public function bill()
     {
         return $this->belongsTo(Bill::class);
+    }
+
+    public function getAmountAttribute()
+    {
+        return $this->price * $this->quantity;
     }
 }
