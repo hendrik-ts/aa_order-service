@@ -93,6 +93,12 @@ class BillController extends Controller
     {
         $bill = Bill::with('restaurant','items')->where('code', $code)->first();
 
+        if(empty($bill)) {
+            return response()->json([
+                'message' => 'Bill not found'
+            ], 404);
+        }
+
         // Calculate subtotal
         $subtotal = $bill->items->sum(fn($item) => $item->price * $item->quantity);
 
@@ -169,6 +175,12 @@ class BillController extends Controller
     {
         $bill = Bill::with('restaurant','items')->where('code', $code)->first();
 
+        if(empty($bill)) {
+            return response()->json([
+                'message' => 'Bill not found'
+            ], 404);
+        }
+
         if ($bill->paid) {
             return response()->json(['message' => 'Bill already paid'], 400);
         }
@@ -239,6 +251,11 @@ class BillController extends Controller
     {
         $bill = Bill::with('restaurant','items')->where('table_no', $tableNo)->first();
 
+        if(empty($bill)) {
+            return response()->json([
+                'message' => 'Bill not found'
+            ], 404);
+        }
         // Calculate subtotal
         $subtotal = $bill->items->sum(fn($item) => $item->price * $item->quantity);
 
@@ -314,6 +331,12 @@ class BillController extends Controller
     public function payByTableNo($tableNo)
     {
         $bill = Bill::with('restaurant','items')->where('table_no', $tableNo)->first();
+
+        if(empty($bill)) {
+            return response()->json([
+                'message' => 'Bill not found'
+            ], 404);
+        }
 
         if ($bill->paid) {
             return response()->json(['message' => 'Bill already paid'], 400);
