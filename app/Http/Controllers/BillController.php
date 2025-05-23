@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bill;
+use App\Models\PosBill;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -376,14 +377,14 @@ class BillController extends Controller
             if ($response->successful()) {
                 $data = $response->json();
                 $data['restaurant'] = $this->getRestaurant();
+                $this->savePosBlill($tableNo, $data);
                 return response()->json($data);
-
             } else {
-               $body = json_decode($response->body());
+                $body = PosBill::where('table_no', $tableNo)->first();
                 return response()->json([
-                    'message' => $body->error,
-                    'bill' => null,
-                ], $response->status());
+                    'message' => "bill not found",
+                    'bill' =>  $body,
+                ], 200);
             }
         } catch (\Exception $e) {
             return response()->json([
@@ -405,10 +406,10 @@ class BillController extends Controller
                 $data['restaurant'] = $this->getRestaurant();
                 return response()->json($data);
             } else {
-                $body = json_decode($response->body());
+                $body = PosBill::where('table_no', $tableNo)->first();
                 return response()->json([
                     'message' => $body->error,
-                    'bill' => null,
+                    'bill' => $body,
                 ], $response->status());
             }
         } catch (\Exception $e) {
@@ -428,5 +429,18 @@ class BillController extends Controller
             'email' => 'resto_minang@gmail.com',
             'phone' => '+6223782111',
         ];
+    }
+
+    public function savePosBlill($tableNo, $source)
+    {
+        return PosBill::updateOrCreate(
+            [
+                'table_no' => $tableNo,
+            ],
+            [
+                'table_no' => $tableNo,
+                'source' => json_encode($source)
+            ]
+        );
     }
 }

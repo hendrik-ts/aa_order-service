@@ -11,8 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('pos_bills', function (Blueprint $table) {
-
+        Schema::create('pos_bills', function (Blueprint $table) {
             $table->id();
             $table->string('table_no', 20);
             $table->json('source')->nullable();

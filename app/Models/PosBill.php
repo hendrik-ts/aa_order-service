@@ -12,26 +12,7 @@ class PosBill extends Model
     ];
 
     protected $hidden = [
-        'outlet_name'
+        'created_at',
+        'updated_at'
     ];
-
-    protected $casts = [
-        'paid' => 'boolean',
-        'paid_at' => 'datetime',
-    ];
-
-    public function items()
-    {
-        return $this->hasMany(BillItem::class);
-    }
-
-    public function payment()
-    {
-        return $this->hasOne(BillPayment::class);
-    }
-
-    public function restaurant()
-    {
-        return $this->belongsTo(Restaurant::class);
-    }
 }
