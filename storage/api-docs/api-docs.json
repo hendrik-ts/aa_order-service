@@ -428,18 +428,18 @@
                 }
             }
         },
-        "/api/bills/{table_no}": {
+        "/api/bills/table_no/{table_no}": {
             "get": {
                 "tags": [
                     "Bills"
                 ],
                 "summary": "View a bill with details, subtotal, discount, tax, and grand total",
-                "operationId": "29dcdaba431da59ce45fc26bc0d46434",
+                "operationId": "1efb20fb11609807f1efcd7d85d43ad9",
                 "parameters": [
                     {
                         "name": "table_no",
                         "in": "path",
-                        "description": "Bill Code",
+                        "description": "Table no",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -520,13 +520,13 @@
                 }
             }
         },
-        "/api/bills/{table_no}/pay": {
+        "/api/bills/table_no/{table_no}/pay": {
             "post": {
                 "tags": [
                     "Bills"
                 ],
                 "summary": "Pay a bill",
-                "operationId": "96bde9d57e12da8d0d76bbca9e4643f1",
+                "operationId": "4c19a2f05f8ab0f1969b87f4aa7e28cb",
                 "parameters": [
                     {
                         "name": "table_no",

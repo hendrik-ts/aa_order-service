@@ -192,13 +192,13 @@ class BillController extends Controller
 
         /**
      * @OA\Get(
-     *     path="/api/bills/{table_no}",
+     *     path="/api/bills/table_no/{table_no}",
      *     tags={"Bills"},
      *     summary="View a bill with details, subtotal, discount, tax, and grand total",
      *     @OA\Parameter(
      *         name="table_no",
      *         in="path",
-     *         description="Bill Code",
+     *         description="Table no",
      *         required=true,
      *         @OA\Schema(type="string")
      *     ),
@@ -261,7 +261,7 @@ class BillController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/bills/{table_no}/pay",
+     *     path="/api/bills/table_no/{table_no}/pay",
      *     tags={"Bills"},
      *     summary="Pay a bill",
      *     @OA\Parameter(
