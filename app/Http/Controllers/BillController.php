@@ -181,9 +181,9 @@ class BillController extends Controller
             ], 404);
         }
 
-        if ($bill->paid) {
-            return response()->json(['message' => 'Bill already paid'], 400);
-        }
+        // if ($bill->paid) {
+        //     return response()->json(['message' => 'Bill already paid'], 400);
+        // }
 
         $subtotal = $bill->items->sum(fn($item) => $item->price * $item->quantity);
         $discount = $bill->discount ?? 0;
@@ -338,9 +338,9 @@ class BillController extends Controller
             ], 404);
         }
 
-        if ($bill->paid) {
-            return response()->json(['message' => 'Bill already paid'], 400);
-        }
+        // if ($bill->paid) {
+        //     return response()->json(['message' => 'Bill already paid'], 400);
+        // }
 
         $subtotal = $bill->items->sum(fn($item) => $item->price * $item->quantity);
         $discount = $bill->discount ?? 0;
