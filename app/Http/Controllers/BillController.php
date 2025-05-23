@@ -373,16 +373,19 @@ class BillController extends Controller
 
         try {
             $response = Http::timeout(10)->get($url);
-
             if ($response->successful()) {
                 $data = $response->json();
                 $data['restaurant'] = $this->getRestaurant();
-                return response()->json($data, 200);
-            } else {
                 return response()->json([
-                    'message' => 'Failed to fetch bills',
-                    'status' => $response->status(),
-                    'body' => $response->body()
+                    'message' => 'Bill show successfully',
+                    'bill' => $data
+                ]);
+
+            } else {
+               $body = json_decode($response->body());
+                return response()->json([
+                    'message' => $body->error,
+                    'bill' => null,
                 ], $response->status());
             }
         } catch (\Exception $e) {
@@ -403,12 +406,15 @@ class BillController extends Controller
             if ($response->successful()) {
                 $data = $response->json();
                 $data['restaurant'] = $this->getRestaurant();
-                return response()->json($data, 200);
-            } else {
                 return response()->json([
-                    'message' => 'Failed to fetch bills',
-                    'status' => $response->status(),
-                    'body' => $response->body()
+                    'message' => 'Bill show successfully',
+                    'bill' => $data
+                ]);
+            } else {
+                $body = json_decode($response->body());
+                return response()->json([
+                    'message' => $body->error,
+                    'bill' => null,
                 ], $response->status());
             }
         } catch (\Exception $e) {
