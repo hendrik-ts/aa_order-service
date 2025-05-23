@@ -376,10 +376,7 @@ class BillController extends Controller
             if ($response->successful()) {
                 $data = $response->json();
                 $data['restaurant'] = $this->getRestaurant();
-                return response()->json([
-                    'message' => 'Bill show successfully',
-                    'bill' => $data
-                ]);
+                return response()->json($data);
 
             } else {
                $body = json_decode($response->body());
@@ -406,10 +403,7 @@ class BillController extends Controller
             if ($response->successful()) {
                 $data = $response->json();
                 $data['restaurant'] = $this->getRestaurant();
-                return response()->json([
-                    'message' => 'Bill show successfully',
-                    'bill' => $data
-                ]);
+                return response()->json($data);
             } else {
                 $body = json_decode($response->body());
                 return response()->json([
