@@ -38,5 +38,9 @@ Route::delete('/reviews/{id}', [ReviewController::class, 'destroy']);
 Route::get('/bills', [BillController::class, 'index']);
 Route::get('/bills/{code}', [BillController::class, 'show']);
 Route::post('/bills/{code}/pay', [BillController::class, 'pay']);
-Route::get('/bills/table_no/{table_no}', [BillController::class, 'showByTableNo']);
-Route::post('/bills/table_no/{table_no}/pay', [BillController::class, 'payByTableNo']);
+
+Route::get('/v1/bills/table_no/{table_no}', [BillController::class, 'showByTableNo']);
+Route::post('/v1/bills/table_no/{table_no}/pay', [BillController::class, 'payByTableNo']);
+
+Route::get('/bills/table_no/{tableNo}', [BillController::class, 'showExternalBills']);
+Route::post('/bills/table_no/{tableNo}/pay', [BillController::class, 'payExternalBills']);

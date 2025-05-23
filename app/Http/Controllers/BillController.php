@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bill;
+use App\Models\Restaurant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class BillController extends Controller
 {
+    protected string $externalBillApiBaseUrl;
+
+    public function __construct()
+    {
+        $this->externalBillApiBaseUrl = env('EXTERNAL_BILL_API_BASE_URL', 'https://08d0-103-165-124-226.ngrok-free.app/api/bills');
+    }
 
     /**
      * @OA\Tag(
@@ -91,9 +99,9 @@ class BillController extends Controller
      */
     public function show($code)
     {
-        $bill = Bill::with('restaurant','items','payment')->where('code', $code)->first();
+        $bill = Bill::with('restaurant', 'items', 'payment')->where('code', $code)->first();
 
-        if(empty($bill)) {
+        if (empty($bill)) {
             return response()->json([
                 'message' => 'Bill not found'
             ], 404);
@@ -173,9 +181,9 @@ class BillController extends Controller
      */
     public function pay($code)
     {
-        $bill = Bill::with('restaurant','items','payment')->where('code', $code)->first();
+        $bill = Bill::with('restaurant', 'items', 'payment')->where('code', $code)->first();
 
-        if(empty($bill)) {
+        if (empty($bill)) {
             return response()->json([
                 'message' => 'Bill not found'
             ], 404);
@@ -202,7 +210,7 @@ class BillController extends Controller
         ]);
     }
 
-        /**
+    /**
      * @OA\Get(
      *     path="/api/bills/table_no/{table_no}",
      *     tags={"Bills"},
@@ -249,9 +257,9 @@ class BillController extends Controller
      */
     public function showByTableNo($tableNo)
     {
-        $bill = Bill::with('restaurant','items','payment')->where('table_no', $tableNo)->first();
+        $bill = Bill::with('restaurant', 'items', 'payment')->where('table_no', $tableNo)->first();
 
-        if(empty($bill)) {
+        if (empty($bill)) {
             return response()->json([
                 'message' => 'Bill not found'
             ], 404);
@@ -330,9 +338,9 @@ class BillController extends Controller
      */
     public function payByTableNo($tableNo)
     {
-        $bill = Bill::with('restaurant','items','payment')->where('table_no', $tableNo)->first();
+        $bill = Bill::with('restaurant', 'items', 'payment')->where('table_no', $tableNo)->first();
 
-        if(empty($bill)) {
+        if (empty($bill)) {
             return response()->json([
                 'message' => 'Bill not found'
             ], 404);
@@ -357,5 +365,68 @@ class BillController extends Controller
             'message' => 'Bill paid successfully',
             'bill' => $bill
         ]);
+    }
+
+    public function showExternalBills($tableNo)
+    {
+        $url = $this->externalBillApiBaseUrl . "/table_no/{$tableNo}";
+
+        try {
+            $response = Http::timeout(10)->get($url);
+
+            if ($response->successful()) {
+                $data = $response->json();
+                $data['restaurant'] = $this->getRestaurant();
+                return response()->json($data, 200);
+            } else {
+                return response()->json([
+                    'message' => 'Failed to fetch bills',
+                    'status' => $response->status(),
+                    'body' => $response->body()
+                ], $response->status());
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error contacting external API',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function payExternalBills($tableNo)
+    {
+        $url = $this->externalBillApiBaseUrl . "/table_no/{$tableNo}/pay";
+
+        try {
+            $response = Http::timeout(10)->post($url);
+
+            if ($response->successful()) {
+                $data = $response->json();
+                $data['restaurant'] = $this->getRestaurant();
+                return response()->json($data, 200);
+            } else {
+                return response()->json([
+                    'message' => 'Failed to fetch bills',
+                    'status' => $response->status(),
+                    'body' => $response->body()
+                ], $response->status());
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error contacting external API',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+
+    public function getRestaurant()
+    {
+        return  [
+            'id' => 2,
+            'name' => 'Resto Minang',
+            'email' => 'resto_minang@gmail.com',
+            'phone' => '+6223782111',
+        ];
     }
 }
