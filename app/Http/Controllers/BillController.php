@@ -91,7 +91,7 @@ class BillController extends Controller
      */
     public function show($code)
     {
-        $bill = Bill::with('restaurant','items')->where('code', $code)->first();
+        $bill = Bill::with('restaurant','items','payment')->where('code', $code)->first();
 
         if(empty($bill)) {
             return response()->json([
@@ -173,7 +173,7 @@ class BillController extends Controller
      */
     public function pay($code)
     {
-        $bill = Bill::with('restaurant','items')->where('code', $code)->first();
+        $bill = Bill::with('restaurant','items','payment')->where('code', $code)->first();
 
         if(empty($bill)) {
             return response()->json([
@@ -249,7 +249,7 @@ class BillController extends Controller
      */
     public function showByTableNo($tableNo)
     {
-        $bill = Bill::with('restaurant','items')->where('table_no', $tableNo)->first();
+        $bill = Bill::with('restaurant','items','payment')->where('table_no', $tableNo)->first();
 
         if(empty($bill)) {
             return response()->json([
@@ -330,7 +330,7 @@ class BillController extends Controller
      */
     public function payByTableNo($tableNo)
     {
-        $bill = Bill::with('restaurant','items')->where('table_no', $tableNo)->first();
+        $bill = Bill::with('restaurant','items','payment')->where('table_no', $tableNo)->first();
 
         if(empty($bill)) {
             return response()->json([
